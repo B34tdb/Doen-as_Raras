@@ -6,6 +6,23 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
 from jose import jwt, JWTError
+import pymssql as sql 
+import mysql.connector 
+
+conexao = mysql.connector.connect(
+    host="localhost",
+    port="3306",
+    user="root",
+    password="Sc4rfac3_023412",
+    database="DOENCAS_RARAS"
+)
+
+cursor = conexao.cursor()
+cursor.execute("SELECT DATABASE()")
+resultado = cursor.fetchone()
+
+
+
 
 app = FastAPI(title="API - Doenças Raras")
 
@@ -17,7 +34,7 @@ TEMPO_TOKEN = 30
 oauth2 = OAuth2PasswordBearer(tokenUrl="login")
 
 # Armazenamento temporário dos usuários
-usuarios = {}
+usuario={}
 
 
 # Dados recebidos no cadastro
@@ -25,6 +42,8 @@ class Usuario(BaseModel):
     nome: str
     email: EmailStr
     senha: str
+    cpf: str
+    crm: str
 
 
 class AtualizarNome(BaseModel):
@@ -35,6 +54,12 @@ class UsuarioPublico(BaseModel):
     id: str
     nome: str
     email: EmailStr
+def usuario_publico(linha):
+    return {
+        "id": linha["idusuario"],
+        "nome": linha["nome"],
+        "email": linha["email"],
+    }
 
 
 def gerar_hash(senha):
@@ -61,13 +86,13 @@ def usuario_logado(token: str = Depends(oauth2)):
 
         email = dados.get("sub")
 
-        if not email or email not in usuarios:
+        if not email or email not in usuario:
             raise HTTPException(
                 status_code=401,
                 detail="Usuário não autenticado"
             )
 
-        return usuarios[email]
+        return usuario[email]
 
     except JWTError:
         raise HTTPException(
@@ -78,20 +103,20 @@ def usuario_logado(token: str = Depends(oauth2)):
 
 @app.post("/usuarios/", response_model=UsuarioPublico)
 def cadastrar(usuario: Usuario):
-    if usuario.email in usuarios:
+    if usuario.email in usuario:
         raise HTTPException(
             status_code=400,
             detail="E-mail já cadastrado"
         )
 
     novo_usuario = {
-        "id": str(len(usuarios) + 1),
+        "id": str(len(usuario) + 1),
         "nome": usuario.nome,
         "email": usuario.email,
         "senha_hash": gerar_hash(usuario.senha)
     }
 
-    usuarios[usuario.email] = novo_usuario
+    usuario[usuario.email] = novo_usuario
 
     return novo_usuario
 
@@ -100,7 +125,7 @@ def cadastrar(usuario: Usuario):
 def fazer_login(
     dados: OAuth2PasswordRequestForm = Depends()
 ):
-    usuario = usuarios.get(dados.username)
+    usuario = usuario.get(dados.username)
 
     if not usuario or usuario["senha_hash"] != gerar_hash(
         dados.password
@@ -118,15 +143,65 @@ def fazer_login(
     }
 
 
-@app.get("/usuarios/me", response_model=UsuarioPublico)
+@app.get("/usuario/me", response_model=UsuarioPublico)
 def meu_perfil(usuario=Depends(usuario_logado)):
     return usuario
 
+@app.put("/usuarios/{id_usuario}")
+def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
+  
+    cursor = conexao.cursor()
+ 
+    cursor.execute(
+        "UPDATE usuario SET nome = %s WHERE idusuario = %s",
+        (dados.nome, id_usuario)
+    )
+ 
+    conexao.commit()
+ 
+    if cursor.rowcount == 0:
+        cursor.close()
+        conexao.close()
+ 
+        raise HTTPException(
+            status_code=404,
+            detail="Usuário não encontrado"
+        )
+ 
+    cursor.close()
+    conexao.close()
+ 
+    return {
+        "mensagem": "Usuário atualizado com sucesso",
+        "idusuario": id_usuario,
+        "nome": dados.nome
+    }
+ 
 
-@app.put("/usuarios/me", response_model=UsuarioPublico)
-def atualizar_perfil(
-    dados: AtualizarNome,
-    usuario=Depends(usuario_logado)
-):
-    usuario["nome"] = dados.nome
-    return usuario
+
+@app.delete("/usuarios/{id_usuario}")
+def deletar_usuario(id_usuario: int):
+    cursor = conexao.cursor()
+
+    cursor.execute(
+        "DELETE FROM usuario WHERE idusuario = %s",
+        (id_usuario,)
+    )
+
+    conexao.commit()
+
+    if cursor.rowcount == 0:
+        cursor.close()
+        conexao.close()
+        raise HTTPException(
+            status_code=404,
+            detail="Usuário não encontrado"
+        )
+
+    cursor.close()
+    conexao.close()
+
+    return {
+        "mensagem": "Usuário deletado com sucesso",
+        "idusuario": id_usuario
+    }
