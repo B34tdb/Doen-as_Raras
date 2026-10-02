@@ -1,7 +1,7 @@
 
 from datetime import datetime, timedelta, timezone
 import hashlib
-
+from typing import Optional
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
@@ -43,7 +43,7 @@ class Usuario(BaseModel):
     email: EmailStr
     senha: str
     cpf: str
-    crm: str
+    crm: Optional[str] = None
 
 
 class AtualizarNome(BaseModel):
@@ -101,59 +101,109 @@ def usuario_logado(token: str = Depends(oauth2)):
         )
 
 
-@app.post("/usuarios/", response_model=UsuarioPublico)
-def cadastrar(usuario: Usuario):
-    if usuario.email in usuario:
+@app.post("/usuario", response_model=UsuarioPublico)
+def cadastrar(dados: Usuario):
+    cursor = conexao.cursor(dictionary=True)
+
+    cursor.execute(
+        "SELECT idusuario FROM usuario WHERE email = %s",
+        (dados.email,)
+    )
+    if cursor.fetchone():
+        cursor.close()
         raise HTTPException(
             status_code=400,
             detail="E-mail já cadastrado"
         )
 
-    novo_usuario = {
-        "id": str(len(usuario) + 1),
-        "nome": usuario.nome,
-        "email": usuario.email,
-        "senha_hash": gerar_hash(usuario.senha)
+    cursor.execute(
+        "INSERT INTO usuario (nome, email, senha, cpf, crm) VALUES (%s, %s, %s, %s, %s)",
+        (dados.nome, dados.email, gerar_hash(dados.senha), dados.cpf, dados.crm)
+    )
+    conexao.commit()
+
+    novo_id = cursor.lastrowid
+    cursor.close()
+
+    return {
+        "id": str(novo_id),
+        "nome": dados.nome,
+        "email": dados.email
     }
 
-    usuario[usuario.email] = novo_usuario
+# @app.post("/login/")
+# def fazer_login(
+#     dados: OAuth2PasswordRequestForm = Depends()
+# ):
+#     usuario = usuario.get(dados.username)
 
-    return novo_usuario
+#     if not usuario or usuario["senha_hash"] != gerar_hash(
+#         dados.password
+#     ):
+#         raise HTTPException(
+#             status_code=401,
+#             detail="E-mail ou senha incorretos"
+#         )
 
+#     token = gerar_token(usuario["email"])
 
+#     return {
+#         "access_token": token,
+#         "token_type": "bearer"
+#     }
 @app.post("/login/")
 def fazer_login(
     dados: OAuth2PasswordRequestForm = Depends()
 ):
-    usuario = usuario.get(dados.username)
+    cursor = conexao.cursor(dictionary=True)
 
-    if not usuario or usuario["senha_hash"] != gerar_hash(
-        dados.password
-    ):
+    cursor.execute(
+        """
+        SELECT email, senha
+        FROM usuario
+        WHERE email = %s
+        """,
+        ( dados.username,)
+    )
+
+    usuario_db = cursor.fetchone()
+
+    cursor.close()
+
+    if not usuario_db:
+        raise HTTPException(
+            status_code=401,
+            detail="E-mail ou usuário incorretos"
+        )
+
+    if usuario_db["senha"] != gerar_hash(dados.password):
         raise HTTPException(
             status_code=401,
             detail="E-mail ou senha incorretos"
         )
 
-    token = gerar_token(usuario["email"])
+    token = gerar_token(usuario_db["email"])
 
     return {
         "access_token": token,
         "token_type": "bearer"
     }
 
-
-@app.get("/usuario/me", response_model=UsuarioPublico)
+@app.get("/usuario/", response_model=UsuarioPublico)
 def meu_perfil(usuario=Depends(usuario_logado)):
     return usuario
 
-@app.put("/usuarios/{id_usuario}")
+
+
+
+
+@app.put("/usuario/{id_usuario}")
 def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
   
     cursor = conexao.cursor()
  
     cursor.execute(
-        "UPDATE usuario SET nome = %s WHERE idusuario = %s",
+        "UPDATE usuario SET nome = %s," , " update usuario SET email =%s," " WHERE idusuario = %s",
         (dados.nome, id_usuario)
     )
  
@@ -179,7 +229,7 @@ def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
  
 
 
-@app.delete("/usuarios/{id_usuario}")
+@app.delete("/usuario/{id_usuario}")
 def deletar_usuario(id_usuario: int):
     cursor = conexao.cursor()
 
@@ -191,15 +241,12 @@ def deletar_usuario(id_usuario: int):
     conexao.commit()
 
     if cursor.rowcount == 0:
-        cursor.close()
-        conexao.close()
+    
         raise HTTPException(
             status_code=404,
             detail="Usuário não encontrado"
         )
 
-    cursor.close()
-    conexao.close()
 
     return {
         "mensagem": "Usuário deletado com sucesso",
