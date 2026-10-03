@@ -9,6 +9,7 @@ from jose import jwt, JWTError
 import pymssql as sql 
 import mysql.connector 
 
+# conexao com o banco de dados
 conexao = mysql.connector.connect(
     host="localhost",
     port="3306",
@@ -22,9 +23,9 @@ cursor.execute("SELECT DATABASE()")
 resultado = cursor.fetchone()
 
 
-
-
 app = FastAPI(title="API - Doenças Raras")
+
+
 
 # Configurações do token
 CHAVE_SECRETA = "chave_secreta_projeto_faculdade"
@@ -47,7 +48,11 @@ class Usuario(BaseModel):
 
 
 class AtualizarNome(BaseModel):
-    nome: str
+    nome: Optional[str] = None
+    email: Optional[str] = None
+    senha:Optional[str] = None
+    cpf: Optional[str] = None
+    crm: Optional[str] = None
 
 
 class UsuarioPublico(BaseModel):
@@ -77,7 +82,7 @@ def gerar_token(email):
         dados, CHAVE_SECRETA, algorithm=ALGORITMO
     )
 
-
+ 
 def usuario_logado(token: str = Depends(oauth2)):
     try:
         dados = jwt.decode(
@@ -100,7 +105,7 @@ def usuario_logado(token: str = Depends(oauth2)):
             detail="Token inválido ou expirado"
         )
 
-
+# esta funcionando 
 @app.post("/usuario", response_model=UsuarioPublico)
 def cadastrar(dados: Usuario):
     cursor = conexao.cursor(dictionary=True)
@@ -131,26 +136,7 @@ def cadastrar(dados: Usuario):
         "email": dados.email
     }
 
-# @app.post("/login/")
-# def fazer_login(
-#     dados: OAuth2PasswordRequestForm = Depends()
-# ):
-#     usuario = usuario.get(dados.username)
-
-#     if not usuario or usuario["senha_hash"] != gerar_hash(
-#         dados.password
-#     ):
-#         raise HTTPException(
-#             status_code=401,
-#             detail="E-mail ou senha incorretos"
-#         )
-
-#     token = gerar_token(usuario["email"])
-
-#     return {
-#         "access_token": token,
-#         "token_type": "bearer"
-#     }
+# esta funcionando 
 @app.post("/login/")
 def fazer_login(
     dados: OAuth2PasswordRequestForm = Depends()
@@ -158,13 +144,9 @@ def fazer_login(
     cursor = conexao.cursor(dictionary=True)
 
     cursor.execute(
-        """
-        SELECT email, senha
-        FROM usuario
-        WHERE email = %s
-        """,
-        ( dados.username,)
-    )
+    "SELECT email, senha FROM usuario WHERE email = %s",
+    (dados.username,)
+)
 
     usuario_db = cursor.fetchone()
 
@@ -189,22 +171,34 @@ def fazer_login(
         "token_type": "bearer"
     }
 
-@app.get("/usuario/", response_model=UsuarioPublico)
-def meu_perfil(usuario=Depends(usuario_logado)):
-    return usuario
+@app.get("/usuarios", response_model=list[UsuarioPublico])
+def listar_usuarios():
+    
+    cursor = conexao.cursor(dictionary=True)
+    cursor.execute("SELECT idusuario, nome, email FROM usuario")
+    resultados = cursor.fetchall()
+    cursor.close()
+    conexao.close()
 
+    lista_usuarios = []
+    for u in resultados:
+        lista_usuarios.append({
+            "id": str(u["idusuario"]),
+            "nome": u["nome"],
+            "email": u["email"]
+        })
+    return lista_usuarios
 
-
-
-
+# esta funcionando
 @app.put("/usuario/{id_usuario}")
 def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
   
     cursor = conexao.cursor()
  
     cursor.execute(
-        "UPDATE usuario SET nome = %s," , " update usuario SET email =%s," " WHERE idusuario = %s",
-        (dados.nome, id_usuario)
+        "UPDATE usuario SET nome = %s, email=%s, senha=%s, cpf=%s, crm=%s WHERE idusuario = %s",
+        (dados.nome,dados.email,gerar_hash(dados.senha),dados.cpf,dados.crm, id_usuario)
+  
     )
  
     conexao.commit()
@@ -228,7 +222,7 @@ def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
     }
  
 
-
+# esta funcionando
 @app.delete("/usuario/{id_usuario}")
 def deletar_usuario(id_usuario: int):
     cursor = conexao.cursor()
