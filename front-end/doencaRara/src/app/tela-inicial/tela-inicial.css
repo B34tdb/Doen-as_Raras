@@ -1,0 +1,334 @@
+:host {
+  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.login-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at 20% 20%, #f466a6 0%, #e83888 45%, #c5337c 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Anéis decorativos translúcidos no fundo */
+.bg-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.ring-top-right-outer {
+  width: 520px;
+  height: 520px;
+  top: -120px;
+  right: -120px;
+}
+
+.ring-top-right-inner {
+  width: 390px;
+  height: 390px;
+  top: -55px;
+  right: -55px;
+}
+
+.ring-bottom-left-outer {
+  width: 780px;
+  height: 780px;
+  bottom: -240px;
+  left: -180px;
+}
+
+.ring-bottom-left-inner {
+  width: 630px;
+  height: 630px;
+  bottom: -165px;
+  left: -105px;
+}
+
+.content-area {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1040px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cartão Branco */
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 370px;
+  border-radius: 20px;
+  padding: 2.25rem 2rem 2rem;
+  box-shadow: 0 20px 50px rgba(136, 17, 74, 0.25);
+  box-sizing: border-box;
+}
+
+/* Cabeçalho da Marca */
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+}
+
+.brand-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background-color: #ec3b8b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+/* Textos de Boas-vindas */
+.welcome-section {
+  margin-bottom: 1.5rem;
+}
+
+.welcome-tag {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ec3b8b;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.welcome-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.22;
+  margin: 0 0 0.65rem 0;
+  letter-spacing: -0.02em;
+}
+
+.welcome-subtitle {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Formulário */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.form-group input {
+  width: 100%;
+  height: 40px;
+  padding: 0 0.85rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #1e293b;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ec3b8b;
+  box-shadow: 0 0 0 3px rgba(236, 59, 139, 0.12);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  padding-right: 2.5rem;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 0.65rem;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Checkbox e Esqueceu a senha */
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.85rem 0 1.25rem;
+  font-size: 0.7rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  color: #475569;
+  user-select: none;
+}
+
+.checkbox-container input {
+  accent-color: #ec3b8b;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: #ec3b8b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Botão Principal */
+.btn-primary {
+  position: relative;
+  width: 100%;
+  height: 42px;
+  background-color: #ec3b8b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background-color: #d92b7a;
+}
+
+.btn-primary:active {
+  transform: scale(0.99);
+}
+
+.btn-primary .arrow-icon {
+  position: absolute;
+  right: 1rem;
+}
+
+/* Divisor */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.25rem 0;
+  color: #94a3b8;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.divider span {
+  padding: 0 0.75rem;
+}
+
+/* Botão Google Workspace */
+.btn-google {
+  width: 100%;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-google:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Frase Inferior Esquerda */
+.hero-tagline {
+  align-self: flex-start;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 2rem 0 0 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Rodapé */
+.page-footer {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero-tagline {
+    align-self: center;
+    text-align: center;
+    margin-left: 0;
+  }
+}

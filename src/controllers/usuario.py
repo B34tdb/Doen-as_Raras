@@ -175,17 +175,17 @@ def fazer_login(
 def listar_usuarios():
     
     cursor = conexao.cursor(dictionary=True)
-    cursor.execute("SELECT idusuario, nome, email FROM usuario")
+    cursor.execute("SELECT idusuario, nome, email, senha, cpf, crm FROM usuario")
     resultados = cursor.fetchall()
     cursor.close()
-    conexao.close()
-
+ 
     lista_usuarios = []
     for u in resultados:
         lista_usuarios.append({
             "id": str(u["idusuario"]),
             "nome": u["nome"],
-            "email": u["email"]
+            "email": u["email"],
+           
         })
     return lista_usuarios
 
@@ -205,7 +205,7 @@ def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
  
     if cursor.rowcount == 0:
         cursor.close()
-        conexao.close()
+
  
         raise HTTPException(
             status_code=404,
@@ -213,7 +213,6 @@ def atualizar_perfil(id_usuario: int, dados: AtualizarNome):
         )
  
     cursor.close()
-    conexao.close()
  
     return {
         "mensagem": "Usuário atualizado com sucesso",
