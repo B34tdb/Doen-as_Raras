@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
-
+import { TelaInicial } from './tela-inicial/tela-inicial';
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [App, TelaInicial],
     }).compileComponents();
   });
 

@@ -1,66 +1,51 @@
-<div class="login-wrapper">
-  <!-- Anéis decorativos de fundo -->
-  <div class="bg-ring ring-top-right-outer"></div>
-  <div class="bg-ring ring-top-right-inner"></div>
-  <div class="bg-ring ring-bottom-left-outer"></div>
-  <div class="bg-ring ring-bottom-left-inner"></div>
+<div class="pagina-container">
+  <!-- Círculos decorativos no fundo -->
+  <div class="circulo c-topo-dir-1"></div>
+  <div class="circulo c-topo-dir-2"></div>
+  <div class="circulo c-baixo-esq-1"></div>
+  <div class="circulo c-baixo-esq-2"></div>
 
-  <main class="content-area">
+  <main class="conteudo-principal">
     <!-- Cartão Branco Central -->
-    <section class="login-card">
-      <!-- Cabeçalho / Logótipo -->
-      <header class="brand-header">
-        <div class="brand-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 2C12.3 7.5 16.5 11.7 22 12C16.5 12.3 12.3 16.5 12 22C11.7 16.5 7.5 12.3 2 12C7.5 11.7 11.7 7.5 12 2Z"
-              fill="#FFFFFF"
-            />
-          </svg>
-        </div>
-        <span class="brand-name">Doenças Raras</span>
+    <section class="cartao-login">
+      <!-- Marca / Logótipo -->
+      <header class="marca-header">
+       
+        <span class="marca-nome">Doenças Raras</span>
       </header>
 
-      <!-- Boas-vindas -->
-      <div class="welcome-section">
-        <span class="welcome-tag">BEM-VINDA(O)</span>
-        <h1 class="welcome-title">Acesso à informação<br />começa aqui.</h1>
-        <p class="welcome-subtitle">
-          Um espaço de cuidado e conhecimento<br />
-          sobre saúde e doenças raras.
+      <!-- Título e Boas-vindas -->
+      <div class="boas-vindas">
+        <h1 class="titulo">Acesso à conta <br />começa aqui.</h1>
+        <p class="subtitulo">
+          Um espaço seguro de cuidado, apoio e conhecimento sobre saúde e doenças raras.
         </p>
       </div>
 
-      <!-- Formulário -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
-        <!-- Campo E-mail -->
-        <div class="form-group">
+      <!-- Campos Visuais (sem lógica complexa) -->
+      <div class="formulario-visual">
+        <div class="campo-grupo">
           <label for="email">E-mail</label>
           <input
             id="email"
             type="email"
-            formControlName="email"
-            placeholder="voce@exemplo.com"
-            autocomplete="email"
+            placeholder="Sabrina92137@exemplo.com"
           />
         </div>
 
-        <!-- Campo Senha -->
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <div class="password-input-wrapper">
+        <div class="campo-grupo">
+          <label for="senha">Senha</label>
+          <div class="input-senha-box">
             <input
-              id="password"
-              [type]="showPassword() ? 'text' : 'password'"
-              formControlName="password"
+              id="senha"
+              [type]="mostrarSenha() ? 'text' : 'password'"
               placeholder="••••••••••••"
-              autocomplete="current-password"
             />
             <button
               type="button"
-              class="toggle-password-btn"
-              (click)="togglePasswordVisibility()"
-              aria-label="Mostrar ou ocultar senha"
+              class="btn-olho"
+              (click)="alternarSenha()"
+              title="Mostrar/Ocultar senha"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8C96A6" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -70,51 +55,51 @@
           </div>
         </div>
 
-        <!-- Opções Extras -->
-        <div class="form-options">
-          <label class="checkbox-container">
-            <input type="checkbox" formControlName="rememberMe" />
-            <span class="checkmark"></span>
-            <span class="checkbox-label">Manter conectado</span>
+        <div class="opcoes-linha">
+          <label class="checkbox-item">
+            <input type="checkbox" checked />
+            <span>Manter conectado</span>
           </label>
-          <a href="javascript:void(0)" class="forgot-link">Esqueceu a senha?</a>
+          <a href="javascript:void(0)" class="link-rosa">Esqueceu a senha?</a>
         </div>
 
-        <!-- Botão Principal -->
-        <button type="submit" class="btn-primary">
+        <button type="button" class="btn-entrar">
           <span>Entrar na plataforma</span>
-          <svg class="arrow-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg class="icone-seta" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <line x1="5" y1="12" x2="19" y2="12" />
             <polyline points="12 5 19 12 12 19" />
           </svg>
         </button>
-      </form>
+      </div>
 
       <!-- Divisor -->
-      <div class="divider">
-        <span>OU ACESSE COM</span>
+      <div class="divisor">
+        <span>OU CONTINUE COM</span>
       </div>
 
       <!-- Botão Google Workspace -->
-      <button type="button" class="btn-google" (click)="onGoogleLogin()">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#4A5568">
-          <rect x="3" y="3" width="18" height="18" rx="3" stroke="#4A5568" stroke-width="2" fill="none"/>
-          <line x1="8" y1="9" x2="16" y2="9" stroke="#4A5568" stroke-width="2"/>
-          <line x1="8" y1="13" x2="16" y2="13" stroke="#4A5568" stroke-width="2"/>
-          <line x1="8" y1="17" x2="13" y2="17" stroke="#4A5568" stroke-width="2"/>
+      <button type="button" class="btn-google">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="9" x2="16" y2="9" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="13" x2="16" y2="13" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="17" x2="13" y2="17" stroke="#475569" stroke-width="2"/>
         </svg>
         <span>Google Workspace</span>
       </button>
+
+      <!-- Chamada extra para registo (nova adição) -->
+      <p class="texto-cadastro">
+        Ainda não tem acesso? <a href="javascript:void(0)" class="link-rosa">Solicitar cadastro</a>
+      </p>
     </section>
 
-    <!-- Texto de apoio inferior esquerdo -->
-    <p class="hero-tagline">
-      Informação, acolhimento e conexão para quem convive com doenças raras.
-    </p>
+    <!-- Frase de impacto no canto inferior esquerdo -->
+    
   </main>
 
   <!-- Rodapé -->
-  <footer class="page-footer">
+  <footer class="rodape">
     DOENÇAS RARAS · SAÚDE, CUIDADO E CONHECIMENTO
   </footer>
 </div>

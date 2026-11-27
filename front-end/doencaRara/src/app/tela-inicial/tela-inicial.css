@@ -3,11 +3,11 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.login-wrapper {
+.pagina-container {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background: radial-gradient(circle at 20% 20%, #f466a6 0%, #e83888 45%, #c5337c 100%);
+  background: linear-gradient(135deg, #f668a8 0%, #e83888 50%, #bd2b74 100%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,47 +17,47 @@
   box-sizing: border-box;
 }
 
-/* Anéis decorativos translúcidos no fundo */
-.bg-ring {
+/* Anéis decorativos */
+.circulo {
   position: absolute;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   pointer-events: none;
 }
 
-.ring-top-right-outer {
-  width: 520px;
-  height: 520px;
-  top: -120px;
-  right: -120px;
+.c-topo-dir-1 {
+  width: 540px;
+  height: 540px;
+  top: -130px;
+  right: -130px;
 }
 
-.ring-top-right-inner {
-  width: 390px;
-  height: 390px;
-  top: -55px;
-  right: -55px;
+.c-topo-dir-2 {
+  width: 400px;
+  height: 400px;
+  top: -60px;
+  right: -60px;
 }
 
-.ring-bottom-left-outer {
+.c-baixo-esq-1 {
   width: 780px;
   height: 780px;
-  bottom: -240px;
+  bottom: -250px;
   left: -180px;
 }
 
-.ring-bottom-left-inner {
-  width: 630px;
-  height: 630px;
-  bottom: -165px;
-  left: -105px;
+.c-baixo-esq-2 {
+  width: 620px;
+  height: 620px;
+  bottom: -170px;
+  left: -100px;
 }
 
-.content-area {
+.conteudo-principal {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 1040px;
+  max-width: 1060px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -66,79 +66,82 @@
 }
 
 /* Cartão Branco */
-.login-card {
+.cartao-login {
   background: #ffffff;
   width: 100%;
-  max-width: 370px;
-  border-radius: 20px;
-  padding: 2.25rem 2rem 2rem;
-  box-shadow: 0 20px 50px rgba(136, 17, 74, 0.25);
+  max-width: 380px;
+  border-radius: 22px;
+  padding: 2.25rem 2rem 1.85rem;
+  box-shadow: 0 24px 55px rgba(122, 14, 66, 0.28);
   box-sizing: border-box;
 }
 
-/* Cabeçalho da Marca */
-.brand-header {
+/* Cabeçalho */
+.marca-header {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.65rem;
 }
 
-.brand-icon {
+.marca-icone {
   width: 34px;
   height: 34px;
-  border-radius: 9px;
-  background-color: #ec3b8b;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f4529b, #dc2878);
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(236, 59, 139, 0.3);
 }
 
-.brand-name {
-  font-size: 1.05rem;
+.marca-nome {
+  font-size: 1.08rem;
   font-weight: 700;
   color: #1e293b;
   letter-spacing: -0.01em;
 }
 
 /* Textos de Boas-vindas */
-.welcome-section {
-  margin-bottom: 1.5rem;
+.boas-vindas {
+  margin-bottom: 1.45rem;
 }
 
-.welcome-tag {
-  display: block;
-  font-size: 0.65rem;
+.etiqueta {
+  display: inline-block;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #ec3b8b;
-  text-transform: uppercase;
-  margin-bottom: 0.45rem;
+  background-color: #fdf2f8;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  margin-bottom: 0.55rem;
 }
 
-.welcome-title {
-  font-size: 1.45rem;
+.titulo {
+  font-size: 1.48rem;
   font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
   line-height: 1.22;
-  margin: 0 0 0.65rem 0;
+  margin: 0 0 0.6rem 0;
   letter-spacing: -0.02em;
 }
 
-.welcome-subtitle {
+.subtitulo {
   font-size: 0.78rem;
   color: #64748b;
   line-height: 1.45;
   margin: 0;
 }
 
-/* Formulário */
-.form-group {
-  margin-bottom: 1rem;
+/* Campos */
+.campo-grupo {
+  margin-bottom: 0.95rem;
 }
 
-.form-group label {
+.campo-grupo label {
   display: block;
   font-size: 0.72rem;
   font-weight: 600;
@@ -146,39 +149,41 @@
   margin-bottom: 0.35rem;
 }
 
-.form-group input {
+.campo-grupo input {
   width: 100%;
-  height: 40px;
+  height: 41px;
   padding: 0 0.85rem;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 9px;
   font-size: 0.8rem;
   color: #1e293b;
+  background-color: #f8fafc;
   box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: all 0.2s ease;
 }
 
-.form-group input::placeholder {
+.campo-grupo input::placeholder {
   color: #94a3b8;
 }
 
-.form-group input:focus {
+.campo-grupo input:focus {
   outline: none;
+  background-color: #ffffff;
   border-color: #ec3b8b;
-  box-shadow: 0 0 0 3px rgba(236, 59, 139, 0.12);
+  box-shadow: 0 0 0 3px rgba(236, 59, 139, 0.14);
 }
 
-.password-input-wrapper {
+.input-senha-box {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.password-input-wrapper input {
+.input-senha-box input {
   padding-right: 2.5rem;
 }
 
-.toggle-password-btn {
+.btn-olho {
   position: absolute;
   right: 0.65rem;
   background: none;
@@ -190,16 +195,16 @@
   justify-content: center;
 }
 
-/* Checkbox e Esqueceu a senha */
-.form-options {
+/* Opções */
+.opcoes-linha {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0.85rem 0 1.25rem;
-  font-size: 0.7rem;
+  font-size: 0.71rem;
 }
 
-.checkbox-container {
+.checkbox-item {
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -208,7 +213,7 @@
   user-select: none;
 }
 
-.checkbox-container input {
+.checkbox-item input {
   accent-color: #ec3b8b;
   width: 14px;
   height: 14px;
@@ -216,79 +221,81 @@
   cursor: pointer;
 }
 
-.forgot-link {
+.link-rosa {
   color: #ec3b8b;
   font-weight: 600;
   text-decoration: none;
 }
 
-.forgot-link:hover {
+.link-rosa:hover {
   text-decoration: underline;
 }
 
 /* Botão Principal */
-.btn-primary {
+.btn-entrar {
   position: relative;
   width: 100%;
-  height: 42px;
-  background-color: #ec3b8b;
+  height: 43px;
+  background: linear-gradient(90deg, #ec3b8b 0%, #db2777 100%);
   color: #ffffff;
   border: none;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  border-radius: 9px;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 6px 16px rgba(236, 59, 139, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.btn-primary:hover {
-  background-color: #d92b7a;
+.btn-entrar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(236, 59, 139, 0.36);
 }
 
-.btn-primary:active {
-  transform: scale(0.99);
+.btn-entrar:active {
+  transform: translateY(0);
 }
 
-.btn-primary .arrow-icon {
+.icone-seta {
   position: absolute;
   right: 1rem;
 }
 
 /* Divisor */
-.divider {
+.divisor {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 1.25rem 0;
+  margin: 1.2rem 0;
   color: #94a3b8;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.06em;
 }
 
-.divider::before,
-.divider::after {
+.divisor::before,
+.divisor::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.divider span {
+.divisor span {
   padding: 0 0.75rem;
 }
 
-/* Botão Google Workspace */
+/* Botão Google */
 .btn-google {
   width: 100%;
-  height: 40px;
+  height: 41px;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 9px;
   color: #334155;
-  font-size: 0.78rem;
+  font-size: 0.79rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -303,18 +310,42 @@
   border-color: #cbd5e1;
 }
 
+/* Texto de Cadastro */
+.texto-cadastro {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 1.2rem 0 0;
+}
+
 /* Frase Inferior Esquerda */
-.hero-tagline {
+.frase-destaque {
   align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1.75rem 0 0 1rem;
+}
+
+.ponto-brilho {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+  flex-shrink: 0;
+}
+
+.frase-destaque p {
   color: #ffffff;
   font-size: 0.9rem;
   font-weight: 600;
-  margin: 2rem 0 0 1rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
 }
 
 /* Rodapé */
-.page-footer {
+.rodape {
   position: relative;
   z-index: 1;
   color: rgba(255, 255, 255, 0.85);
@@ -326,7 +357,7 @@
 }
 
 @media (max-width: 768px) {
-  .hero-tagline {
+  .frase-destaque {
     align-self: center;
     text-align: center;
     margin-left: 0;
