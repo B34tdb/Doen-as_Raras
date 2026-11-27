@@ -1,0 +1,365 @@
+:host {
+  display: block;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.pagina-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f668a8 0%, #e83888 50%, #bd2b74 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem 1rem 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Anéis decorativos */
+.circulo {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.c-topo-dir-1 {
+  width: 540px;
+  height: 540px;
+  top: -130px;
+  right: -130px;
+}
+
+.c-topo-dir-2 {
+  width: 400px;
+  height: 400px;
+  top: -60px;
+  right: -60px;
+}
+
+.c-baixo-esq-1 {
+  width: 780px;
+  height: 780px;
+  bottom: -250px;
+  left: -180px;
+}
+
+.c-baixo-esq-2 {
+  width: 620px;
+  height: 620px;
+  bottom: -170px;
+  left: -100px;
+}
+
+.conteudo-principal {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1060px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cartão Branco */
+.cartao-login {
+  background: #ffffff;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 22px;
+  padding: 2.25rem 2rem 1.85rem;
+  box-shadow: 0 24px 55px rgba(122, 14, 66, 0.28);
+  box-sizing: border-box;
+}
+
+/* Cabeçalho */
+.marca-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 1.65rem;
+}
+
+.marca-icone {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f4529b, #dc2878);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(236, 59, 139, 0.3);
+}
+
+.marca-nome {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #1e293b;
+  letter-spacing: -0.01em;
+}
+
+/* Textos de Boas-vindas */
+.boas-vindas {
+  margin-bottom: 1.45rem;
+}
+
+.etiqueta {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #ec3b8b;
+  background-color: #fdf2f8;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  margin-bottom: 0.55rem;
+}
+
+.titulo {
+  font-size: 1.48rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.22;
+  margin: 0 0 0.6rem 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitulo {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Campos */
+.campo-grupo {
+  margin-bottom: 0.95rem;
+}
+
+.campo-grupo label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.campo-grupo input {
+  width: 100%;
+  height: 41px;
+  padding: 0 0.85rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  font-size: 0.8rem;
+  color: #1e293b;
+  background-color: #f8fafc;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.campo-grupo input::placeholder {
+  color: #94a3b8;
+}
+
+.campo-grupo input:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #ec3b8b;
+  box-shadow: 0 0 0 3px rgba(236, 59, 139, 0.14);
+}
+
+.input-senha-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-senha-box input {
+  padding-right: 2.5rem;
+}
+
+.btn-olho {
+  position: absolute;
+  right: 0.65rem;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Opções */
+.opcoes-linha {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.85rem 0 1.25rem;
+  font-size: 0.71rem;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  color: #475569;
+  user-select: none;
+}
+
+.checkbox-item input {
+  accent-color: #ec3b8b;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.link-rosa {
+  color: #ec3b8b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-rosa:hover {
+  text-decoration: underline;
+}
+
+/* Botão Principal */
+.btn-entrar {
+  position: relative;
+  width: 100%;
+  height: 43px;
+  background: linear-gradient(90deg, #ec3b8b 0%, #db2777 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px rgba(236, 59, 139, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-entrar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(236, 59, 139, 0.36);
+}
+
+.btn-entrar:active {
+  transform: translateY(0);
+}
+
+.icone-seta {
+  position: absolute;
+  right: 1rem;
+}
+
+/* Divisor */
+.divisor {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.2rem 0;
+  color: #94a3b8;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.divisor::before,
+.divisor::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.divisor span {
+  padding: 0 0.75rem;
+}
+
+/* Botão Google */
+.btn-google {
+  width: 100%;
+  height: 41px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  color: #334155;
+  font-size: 0.79rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-google:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Texto de Cadastro */
+.texto-cadastro {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 1.2rem 0 0;
+}
+
+/* Frase Inferior Esquerda */
+.frase-destaque {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 1.75rem 0 0 1rem;
+}
+
+.ponto-brilho {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px #ffffff;
+  flex-shrink: 0;
+}
+
+.frase-destaque p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+}
+
+/* Rodapé */
+.rodape {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .frase-destaque {
+    align-self: center;
+    text-align: center;
+    margin-left: 0;
+  }
+}

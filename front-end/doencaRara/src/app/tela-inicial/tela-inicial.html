@@ -1,0 +1,105 @@
+<div class="pagina-container">
+  <!-- Círculos decorativos no fundo -->
+  <div class="circulo c-topo-dir-1"></div>
+  <div class="circulo c-topo-dir-2"></div>
+  <div class="circulo c-baixo-esq-1"></div>
+  <div class="circulo c-baixo-esq-2"></div>
+
+  <main class="conteudo-principal">
+    <!-- Cartão Branco Central -->
+    <section class="cartao-login">
+      <!-- Marca / Logótipo -->
+      <header class="marca-header">
+       
+        <span class="marca-nome">Doenças Raras</span>
+      </header>
+
+      <!-- Título e Boas-vindas -->
+      <div class="boas-vindas">
+        <h1 class="titulo">Acesso à conta <br />começa aqui.</h1>
+        <p class="subtitulo">
+          Um espaço seguro de cuidado, apoio e conhecimento sobre saúde e doenças raras.
+        </p>
+      </div>
+
+      <!-- Campos Visuais (sem lógica complexa) -->
+      <div class="formulario-visual">
+        <div class="campo-grupo">
+          <label for="email">E-mail</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Sabrina92137@exemplo.com"
+          />
+        </div>
+
+        <div class="campo-grupo">
+          <label for="senha">Senha</label>
+          <div class="input-senha-box">
+            <input
+              id="senha"
+              [type]="mostrarSenha() ? 'text' : 'password'"
+              placeholder="••••••••••••"
+            />
+            <button
+              type="button"
+              class="btn-olho"
+              (click)="alternarSenha()"
+              title="Mostrar/Ocultar senha"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8C96A6" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="opcoes-linha">
+          <label class="checkbox-item">
+            <input type="checkbox" checked />
+            <span>Manter conectado</span>
+          </label>
+          <a href="javascript:void(0)" class="link-rosa">Esqueceu a senha?</a>
+        </div>
+
+        <button type="button" class="btn-entrar">
+          <span>Entrar na plataforma</span>
+          <svg class="icone-seta" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Divisor -->
+      <div class="divisor">
+        <span>OU CONTINUE COM</span>
+      </div>
+
+      <!-- Botão Google Workspace -->
+      <button type="button" class="btn-google">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="9" x2="16" y2="9" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="13" x2="16" y2="13" stroke="#475569" stroke-width="2"/>
+          <line x1="8" y1="17" x2="13" y2="17" stroke="#475569" stroke-width="2"/>
+        </svg>
+        <span>Google Workspace</span>
+      </button>
+
+      <!-- Chamada extra para registo (nova adição) -->
+      <p class="texto-cadastro">
+        Ainda não tem acesso? <a href="javascript:void(0)" class="link-rosa">Solicitar cadastro</a>
+      </p>
+    </section>
+
+    <!-- Frase de impacto no canto inferior esquerdo -->
+    
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    DOENÇAS RARAS · SAÚDE, CUIDADO E CONHECIMENTO
+  </footer>
+</div>
